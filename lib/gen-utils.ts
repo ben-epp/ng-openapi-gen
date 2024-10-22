@@ -288,6 +288,12 @@ export function tsType(schemaOrRef: SchemaOrRef | undefined, options: Options, o
   // Resolve the actual type (maybe nullable)
   const schema = schemaOrRef as SchemaObject;
   const type = rawTsType(schema, options, openApi, container);
+  
+    // A Date
+  if (type === 'string' && ['date-time', 'date'].includes(schema.format)) {
+    return 'Date';
+  }
+  
   return maybeAppendNull(type, !!schema.nullable);
 }
 
