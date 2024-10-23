@@ -293,7 +293,9 @@ export function tsType(schemaOrRef: SchemaOrRef | undefined, options: Options, o
   if (type === 'string' && ['date-time', 'date'].includes(schema.format)) {
     return 'Date';
   }
-  
+  if (type === 'string' && schema.format === "number") {
+    return 'Number';
+  }
   return maybeAppendNull(type, !!schema.nullable);
 }
 
